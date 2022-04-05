@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Plants | Delete
+{% endblock %}
+
+{% block main %}
+<form action="/plants_delete" method="post">
+        <select class="form-control" name="plant_id">
+            <option disabled selected value="">Choose a Plant to Delete</option>
+                    {% for plant in plants %}
+                    <option value="{{ plant['plant_id'] }}">{{ plant["name"] }}</option>
+                    {% endfor %}
+        </select>
+        <a href="/plants" class="btn btn-light">Cancel</a>
+        <button class="btn btn-danger" type="submit">Delete</button>
+    </form>
+{% endblock %}

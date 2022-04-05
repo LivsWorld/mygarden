@@ -1,0 +1,57 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Tasks | Edit
+{% endblock %}
+
+{% block main %}
+    <div class="modify card">
+    <div class="card-body" style="text-align: left">
+        <form action="/tasks_edit" method="post">
+            <div class="form-group">
+                <label for="task">Task</label><br>
+                <input autocomplete="off" autofocus class="form-control" name="task" type="text" value='{{ info["task"] }}'required>
+            </div>
+            <div class="form-group">
+                <label for="plant_id">Plants</label><br>
+                <select class="form-control" name="plant_id">
+                    <option disabled value="" selected>Choose a Plant</option>
+                    {% for plant in plants %}
+                        {% if plant["plant_id"] == info["plant_id"] %}
+                            <option value="{{ plant['plant_id'] }}" selected>{{ plant["name"] }}</option>
+                        {% else %}
+                            <option value="{{ plant['plant_id'] }}">{{ plant["name"] }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="date">Start Date</label><br>
+                <input autocomplete="off" autofocus class="form-control" name="date" type="date" value='{{ info["date"] }}'>
+            </div>
+            <div class="form-group">
+                <label for="time">Time</label><br>
+                <input autocomplete="off" autofocus class="form-control" name="time" type="time" value='{{ info["time"] }}'>
+            </div>
+            {% set increment_types = ("days", "weeks", "months", "years") %}
+            <div class="form-group">
+                <label for="repeats">Repeats every</label>
+                <input autocomplete="off" autofocus class="form-control" name="repeats" type="number" min="1" max="365" value='{{ info["repeats"] }}'>
+                <select class="form-control" name="increment">
+                    <option disabled value="" selected>Choose a measure</option>
+                    {% for item in increment_types %}
+                        {% if item == info["increment"] %}
+                            <option value='{{ item }}' selected>{{ item }}</option>
+                        {% else %}
+                            <option value='{{ item }}'>{{ item }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+            <input type="hidden" name="task_id" value='{{ info["task_id"] }}'>
+            <a href="/tasks" class="btn btn-light">Cancel</a>
+            <button class="btn btn-primary" type="submit">Save</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

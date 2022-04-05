@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Tasks | Delete
+{% endblock %}
+
+{% block main %}
+    <form action="/tasks_delete" method="post">
+        <select class="form-control" name="task_id">
+            <option disabled selected value="">Choose a Task to Delete</option>
+            {% for task in tasks %}
+                <option value="{{ task['task_id'] }}">{{ task["task"] }}
+                {% for name in names %}
+                    {% if name["plant_id"] == task["plant_id"] %}
+                         ~ {{ name["name"] }}
+                    {% endif %}
+                {% endfor %}</option>
+            {% endfor %}
+        </select>
+        <a href="/tasks" class="btn btn-light">Cancel</a>
+        <button class="btn btn-danger" type="submit">Delete</button>
+    </form>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Plants | Add
+{% endblock %}
+
+{% block main %}
+<div class="modify card">
+    <div class="card-body" style="text-align: left">
+        <form action="/plants_add" method="post">
+            <div class="form-group">
+                <label for="name">Name </label><br>
+                <input autocomplete="off" autofocus class="form-control" name="name" type="text" required>
+            </div>
+            <div class="form-group">
+                <label for="quantity"> Quantity </label><br>
+                <input class="form-control" name="quantity" type="number" min="1" max="1000" step="1" required>
+            </div>
+            <div class="form-group">
+                <label for="notes">Notes</label><br>
+                <textarea class="form-control" name="notes"></textarea>
+            </div>
+            <a href="/plants" class="btn btn-light">Cancel</a>
+            <button class="btn btn-success" type="submit">Add</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

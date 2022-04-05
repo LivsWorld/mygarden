@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Plants
+{% endblock %}
+
+{% block main %}
+    <script>
+        function show_select()
+        {
+            if (document.querySelector("form").style.visibility === 'hidden')
+            {
+                document.querySelector("form").style.visibility = 'visible';
+            }
+            else
+            {
+                document.querySelector("form").style.visibility = 'hidden';
+            }
+        }
+
+
+    </script>
+    <h1>MyPlants</h1>
+    <a href="/plants_add" class="btn btn-outline-success"><i class="fas fa-plus"></i> Add</a>
+    <button class="btn btn-outline-primary" onclick="show_select()" id="edit"><i class="fas fa-edit"></i> Edit</button>
+    <a href="/plants_delete" class="btn btn-outline-danger"><i class="fas fa-trash"></i> Delete</a>
+
+    <p></p>
+    <form action="/plants" method="post" style="visibility: hidden;">
+        <select class="form-control" name="plant_id">
+            <option disabled selected value="">Choose a Plant to Edit</option>
+                    {% for plant in plants %}
+                    <option value="{{ plant['plant_id'] }}">{{ plant["name"] }}</option>
+                    {% endfor %}
+        </select>
+        <button class="btn btn-outline-primary" type="submit">Make changes</button>
+    </form>
+    <p></p>
+
+    <div class="card-display">
+    {% for plant in plants %}
+        <div class="card bg-light" id='{{ plant["plant_id"] }}' style="margin-top: 20px;">
+            <div class="card-body">
+                <h5 class="card-title">{{ plant["name"] }}</h5>
+                <p class="card-text"><em>Quantity: {{ plant["quantity"] }}</em></p>
+                <p class="card-text">{{ plant["notes"] }}</p>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+{% endblock %}

@@ -1,0 +1,76 @@
+nav .navbar-brand
+{
+    font-size: xx-large;
+}
+
+nav .navbar-brand .logo
+{
+    color: green;
+    font-family: 'Courgette', cursive;
+}
+
+form
+{
+    margin-top: 25px;
+}
+
+h1
+{
+    color: #8ac769;
+    font-family: 'Courgette', cursive;
+    margin-top: 50px;
+}
+main .form-control
+{
+    /* center form controls */
+    display: inline-block;
+
+    /* override Bootstrap's 100% width for form controls */
+    width: auto;
+}
+
+main
+{
+    /* scroll horizontally as needed */
+    overflow-x: auto;
+
+    /* center contents */
+    text-align: center;
+}
+
+body
+{
+    padding-bottom: 50px;
+}
+
+.column
+{
+    float: left;
+    width: 50%;
+    text-align: center;
+}
+
+@media screen and (max-width: 800px) {
+  .column {
+    width: 100%;
+  }
+}
+
+.card .card-body textarea
+{
+    width: 75%;
+    margin: auto;
+}
+
+.card-display
+{
+    display: inline-block;
+    width: 50%;
+}
+
+.modify
+{
+    margin-top: 50px;
+    width: 50%;
+    display: inline-block;
+}

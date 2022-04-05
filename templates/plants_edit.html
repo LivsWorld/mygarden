@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Plants | Edit
+{% endblock %}
+
+{% block main %}
+<div class="modify card">
+    <div class="card-body" style="text-align: left">
+        <form action="/plants_edit" method="post">
+            <div class="form-group">
+                <label for="name">Name </label><br>
+                <input autocomplete="off" autofocus class="form-control" name="name" type="text" value='{{ info["name"] }}' required>
+            </div>
+            <div class="form-group">
+                <label for="quantity"> Quantity </label><br>
+                <input class="form-control" name="quantity" type="number" min="1" max="1000" step="1" value='{{ info["quantity"] }}'required>
+            </div>
+            <div class="form-group">
+                <label for="notes">Notes</label><br>
+                <textarea class="form-control" name="notes">{{ info["notes"] }}</textarea>
+            </div>
+            <input type="hidden" name="plant_id" value='{{ info["plant_id"] }}'>
+            <a href="/plants" class="btn btn-light">Cancel</a>
+            <button class="btn btn-primary" type="submit">Save</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
+

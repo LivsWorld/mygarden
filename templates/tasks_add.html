@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Tasks | Add
+{% endblock %}
+
+{% block main %}
+<div class="modify card">
+    <div class="card-body" style="text-align: left">
+        <form action="/tasks_add" method="post">
+            <div class="form-group">
+                <label for="task">Task</label><br>
+                <input autocomplete="off" autofocus class="form-control" name="task" type="text" required>
+            </div>
+            <div class="form-group">
+                <label for="plant_id">Plants</label><br>
+                <select class="form-control" name="plant_id">
+                    <option disabled selected value="">Choose a Plant</option>
+                    {% for plant in plants %}
+                        <option value="{{ plant['plant_id'] }}">{{ plant["name"] }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="date">Start Date</label><br>
+                <input autocomplete="off" autofocus class="form-control" name="date" type="date">
+            </div>
+            <div class="form-group">
+                <label for="time">Time</label><br>
+                <input autocomplete="off" autofocus class="form-control" name="time" type="time">
+            </div>
+            <div class="form-group">
+                <label for="repeats">Repeats every</label>
+                <input autocomplete="off" autofocus class="form-control" name="repeats" type="number" min="1" max="365">
+                <select class="form-control" name="increment">
+                    <option disabled selected value="">Choose a measure</option>
+                    <option value="days">days</option>
+                    <option value="weeks">weeks</option>
+                    <option value="months">months</option>
+                    <option value="years">years</option>
+                </select>
+            </div>
+            <a href="/tasks" class="btn btn-light">Cancel</a>
+            <button class="btn btn-success" type="submit">Add</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

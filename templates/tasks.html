@@ -1,0 +1,70 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Tasks
+{% endblock %}
+
+{% block main %}
+    <script>
+        function show_select()
+        {
+            if (document.querySelector("form").style.visibility === 'hidden')
+            {
+                document.querySelector("form").style.visibility = 'visible';
+            }
+            else
+            {
+                document.querySelector("form").style.visibility = 'hidden';
+            }
+        }
+
+    </script>
+    <h1>MyTasks</h1>
+    <a href="/tasks_add" class="btn btn-outline-success"><i class="fas fa-plus"></i> Add</a>
+    <button class="btn btn-outline-primary" onclick="show_select()" id="edit"><i class="fas fa-edit"></i> Edit</button>
+    <a href="/tasks_delete" class="btn btn-outline-danger"><i class="fas fa-trash"></i> Delete</a>
+    <p></p>
+
+    <form action="/tasks" method="post" style="visibility: hidden;">
+        <select class="form-control" name="task_id">
+            <option disabled selected value="">Choose a Task to Edit</option>
+            {% for task in tasks %}
+                <option value="{{ task['task_id'] }}">{{ task["task"] }}
+                {% for name in names %}
+                    {% if name["plant_id"] == task["plant_id"] %}
+                         ~ {{ name["name"] }}
+                    {% endif %}
+                {% endfor %}</option>
+            {% endfor %}
+        </select>
+        <button class="btn btn-outline-primary" type="submit">Make changes</button>
+    </form>
+
+    <p></p>
+    <div class="card-display">
+    {% for task in tasks %}
+        <div class="card bg-light" id='{{ task["task_id"] }}' style="margin-top: 20px;">
+            <div class="card-body">
+                <h5 class="card-title">{{ task["task"] }}
+                {% for name in names %}
+                    {% if name["plant_id"] == task["plant_id"] %}
+                         ~ {{ name["name"] }}
+                    {% endif %}
+                {% endfor %}</h5>
+
+                {% if task["date"] and task["time"]%}
+                    <p class="card-text">{{ task["date"] | date }} at {{ task["time"] | time }}</p>
+                {% elif task["date"] %}
+                    <p class="card-text">{{ task["date"] | date }}</p>
+                {% elif task["time"] %}
+                    <p class="card-text">at {{ task["time"] | time }}</p>
+                {% endif %}
+
+                {% if task["repeats"] and task["increment"] %}
+                    <p class="card-text"><em>Repeats every {{ task["repeats"] }} {{ task["increment"] }}</em></p>
+                {% endif %}
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+{% endblock %}
