@@ -44,4 +44,5 @@ The next time you want to view or modify your plants or tasks, log in with the e
 
 Olivia Shen
 
-## Thanks For Reading!
+## Note
+This was my final project for CS50x 2020.
